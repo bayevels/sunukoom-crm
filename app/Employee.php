@@ -10,4 +10,7 @@ class Employee extends Model
     {
         return $this->belongsTo('App\Point');
     }
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }
