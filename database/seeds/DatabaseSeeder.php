@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class); // crée les rôles
         $this->call(PermissionsTableSeeder::class); // crée les permissions
 
-        factory(User::class,6)->create();
-        factory(Employee::class,2)->create();
+        // factory(User::class,6)->create();
+        factory(Employee::class,3)->create();
         // $role = Role::findByName('writer'); 
         // $role2 = Role::findByName('admin'); 
 

@@ -32,6 +32,15 @@ route::get('/user/edit/{id}', 'UserController@edit')->name('users.edit');
 route::patch('/user/update/{id}', 'UserController@update')->name('users.update');
 route::delete('/user/destroy/{id}', 'UserController@destroy')->name('users.destroy');
 
+// Route for providers
+route::get('/providers/index', 'ProviderController@index')->name('providers.index');
+route::get('/providers/create', 'ProviderController@create')->name('providers.create');
+route::post('/providers/store', 'ProviderController@store')->name('providers.store');
+route::get('/providers/show/{id}', 'ProviderController@show')->name('providers.show');
+route::get('/providers/edit/{id}', 'ProviderController@edit')->name('providers.edit');
+route::patch('/providers/update/{id}', 'ProviderController@update')->name('providers.update');
+route::delete('/providers/destroy/{id}', 'ProviderController@destroy')->name('providers.destroy');
+
 // Route for roles
 route::get('/role/index', 'RoleController@index')->name('roles.index');
 route::get('/role/create', 'RoleController@create')->name('roles.create');

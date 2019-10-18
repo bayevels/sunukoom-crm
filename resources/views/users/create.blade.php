@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2 class="card-header">Create New User</h2>
+            <h2 class="card-header">Create New Employee</h2>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
@@ -32,7 +32,7 @@
     <div class="col-md-8">
     <div class="card">
         <div class="card-body">
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Name:</strong>
                             {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
@@ -48,6 +48,12 @@
                             <div class="form-group">
                                 <strong>Phone:</strong>
                                 {!! Form::text('phone', null, array('placeholder' => 'Phone','class' => 'form-control')) !!}
+                            </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Job:</strong>
+                                {!! Form::text('job', null, array('placeholder' => 'Job','class' => 'form-control')) !!}
                             </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">

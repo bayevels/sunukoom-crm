@@ -14,7 +14,9 @@ class User extends Authenticatable
     public function employee(){
         return $this->hasOne('App\Employee');
     }
-
+    public function provider(){
+        return $this->hasOne('App\Provider');
+    }
     protected $guard_name = 'web';
 
     /**

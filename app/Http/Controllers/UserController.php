@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
+use App\Point;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +45,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|unique:users',
+            'job' => 'required|string',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -51,7 +54,20 @@ class UserController extends Controller
         $input['password'] = bcrypt($input['password']);
 
         $user = User::create($input);
+        // $user = User::create([
+        //     'name'=>$input['name'],
+        //     'email'=>$input['email'],
+        //     'phone'=>$input['phone'],
+        //     'password'=>$input['password'],
+        // ]);
         $user->assignRole($request->input('roles'));
+        
+        // insert user in employee    
+        Employee::create([
+            'user_id'=>$user->id,
+            'job'=>$request->input('job'),
+            'point_id'=>Point::find(1)->id,
+        ]);
 
         return redirect()->route('users.index')
                         ->with('success','User created successfully');
@@ -65,6 +81,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
+        $employee = Employee::where('user_id',$id)->first();
+        $user["job"] = $employee->job; // ajout de la colonne job dans user
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
@@ -76,6 +94,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'phone' => 'required|string|unique:users,phone,'.$id,
+            'job' => 'required',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -89,8 +108,12 @@ class UserController extends Controller
         }
 
 
-        $user = User::find($id);
+        $user = User::find($id); 
         $user->update($input);
+
+        $employee = Employee::where('user_id',$id);
+        $employee->update(['job'=>$input['job']]); // mise à jour sur employee
+        
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
         $user->assignRole($request->input('roles'));

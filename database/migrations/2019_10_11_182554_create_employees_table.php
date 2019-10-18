@@ -14,16 +14,17 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            // $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('job', 100);
             $table->timestamps();
 
             $table->unsignedBigInteger('point_id');
 
-            $table->foreign('point_id')
-            ->references('id')
-            ->on('points')
-            ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('point_id')->references('id')->on('points')->onDelete('cascade');
+
+            $table->primary('user_id');
         });
     }
 
