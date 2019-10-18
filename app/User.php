@@ -11,6 +11,12 @@ class User extends Authenticatable
 {
     use Notifiable, HasRoles;
 
+    public function employee(){
+        return $this->hasOne('App\Employee');
+    }
+    public function provider(){
+        return $this->hasOne('App\Provider');
+    }
     protected $guard_name = 'web';
 
     /**
@@ -19,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'phone','password',
     ];
 
     /**

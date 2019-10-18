@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Provider;
+use App\Employee;
+use App\Point;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
-class ProviderController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,14 +29,14 @@ class ProviderController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id','ASC')->paginate(5);
-        return view('providers.index',compact('data'))
+        return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
     
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('providers.create',compact('roles'));
+        return view('users.create',compact('roles'));
     }
 
     public function store(Request $request)
@@ -40,7 +45,7 @@ class ProviderController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|unique:users',
-            'company' => 'required|string',
+            'job' => 'required|string',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -57,30 +62,31 @@ class ProviderController extends Controller
         // ]);
         $user->assignRole($request->input('roles'));
         
-        // insert user in provider    
-        Provider::create([
+        // insert user in employee    
+        Employee::create([
             'user_id'=>$user->id,
-            'company'=>$request->input('company'),
+            'job'=>$request->input('job'),
+            'point_id'=>Point::find(1)->id,
         ]);
 
-        return redirect()->route('providers.index')
+        return redirect()->route('users.index')
                         ->with('success','User created successfully');
     }
     public function show($id)
     {
         $user = User::find($id);
-        return view('providers.show',compact('user'));
+        return view('users.show',compact('user'));
     }
 
     public function edit($id)
     {
         $user = User::find($id);
-        $provider = Provider::where('user_id',$id)->first();
-        $user["job"] = $provider->job; // ajout de la colonne job dans user
+        $employee = Employee::where('user_id',$id)->first();
+        $user["job"] = $employee->job; // ajout de la colonne job dans user
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
-        return view('providers.edit',compact('user','roles','userRole'));
+        return view('users.edit',compact('user','roles','userRole'));
     }
     public function update(Request $request, $id)
     {
@@ -88,7 +94,7 @@ class ProviderController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'phone' => 'required|string|unique:users,phone,'.$id,
-            'company' => 'required',
+            'job' => 'required',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -105,8 +111,8 @@ class ProviderController extends Controller
         $user = User::find($id); 
         $user->update($input);
 
-        $provider = Provider::where('user_id',$id);
-        $provider->update(['job'=>$input['job']]); // mise à jour sur provider
+        $employee = Employee::where('user_id',$id);
+        $employee->update(['job'=>$input['job']]); // mise à jour sur employee
         
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
@@ -121,4 +127,5 @@ class ProviderController extends Controller
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
+
 }
