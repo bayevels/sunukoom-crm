@@ -1,6 +1,8 @@
 <?php
 
 use App\Employee;
+use App\Point;
+use App\Provider;
 use App\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -18,23 +20,20 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesTableSeeder::class); // crée les rôles
         $this->call(PermissionsTableSeeder::class); // crée les permissions
 
-        // factory(User::class,6)->create();
         factory(Employee::class,3)->create();
-        // $role = Role::findByName('writer'); 
-        // $role2 = Role::findByName('admin'); 
+        factory(Provider::class,1)->create();
 
-        // $permission = Permission::create(['name' => 'edit articles']);
-        // $permission2 = Permission::create(['name' => 'delete articles']);
-        
-        // $role->givePermissionTo($permission);                  //writter
-        // $role2->givePermissionTo([$permission,$permission2]); //admin
-
-        // $user = User::find(1);  // writter
-        // $user2 = User::find(2); //admin
-        // var_dump($user->name);
-
-        // $user->assignRole('writer');
-        // $user2->assignRole('admin');
-
+        $user = User::create([
+            'name'=>'Alioune Bada Ndoye',
+            'email'=>'abada@gmail.com',
+            'phone'=>'773012470',
+            'password'=>bcrypt('123'),
+        ]);
+        Employee::create([
+            'job'=>'Informaticien',
+            'user_id'=>User::where('email','abada@gmail.com')->first()->id,
+            'point_id'=>Point::find(1)->id,
+        ]);
+        $user->assignRole('admin');
     }
 }
