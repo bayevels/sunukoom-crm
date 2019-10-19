@@ -19,19 +19,20 @@
 </head>
 <body>
     <div id="app">
+        
         <div class="navbar-fixed">
                 <nav>
                   <div class="nav-wrapper  teal darken-1">
-                    <a href="{{ url('/') }}" class="brand-logo">Logo</a>
+                    <a href="{{ url('/') }}" class="brand-logo">Entreprise SUNUKOOM</a>
                     <ul class="right hide-on-med-and-down">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a  href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a  href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
-                            <li><a  href="{{ route('users.index') }}">Employees</a></li>
+                            <li><a class="nav-link" href="{{ route('users.index') }}">Employees</a></li>
                             <li><a class="nav-link" href="{{ route('providers.index') }}">Providers</a></li>
-                            <li><a  href="{{ route('roles.index') }}">Roles</a></li>
+                            <li><a class="nav-link" href="{{ route('roles.index') }}">Roles</a></li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
