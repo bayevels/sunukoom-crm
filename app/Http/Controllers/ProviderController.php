@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Provider;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class ProviderController extends Controller
 {
@@ -23,7 +27,9 @@ class ProviderController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id','ASC')->paginate(5);
+        $data = User::with('provider')
+        ->join('providers','users.id', '=', 'providers.user_id')->paginate(5);
+        // $data = User::with('provider')->orderBy('id','ASC')->paginate(5);
         return view('providers.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -76,7 +82,7 @@ class ProviderController extends Controller
     {
         $user = User::find($id);
         $provider = Provider::where('user_id',$id)->first();
-        $user["job"] = $provider->job; // ajout de la colonne job dans user
+        $user["company"] = $provider->company; // ajout de la colonne company dans user
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
 
@@ -106,19 +112,19 @@ class ProviderController extends Controller
         $user->update($input);
 
         $provider = Provider::where('user_id',$id);
-        $provider->update(['job'=>$input['job']]); // mise à jour sur provider
+        $provider->update(['company'=>$input['company']]); // mise à jour sur provider
         
         DB::table('model_has_roles')->where('model_id',$id)->delete();
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
+        return redirect()->route('providers.index')
                         ->with('success','User updated successfully');
     }
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
+        return redirect()->route('providers.index')
                         ->with('success','User deleted successfully');
     }
 }

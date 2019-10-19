@@ -28,7 +28,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id','ASC')->paginate(5);
+        // $data = DB::table('users')
+        //     ->leftJoin('employees', 'users.id', '=', 'employees.user_id')->paginate(5);
+        $data = User::with('employee')
+        ->join('employees','users.id', '=', 'employees.user_id')->paginate(5);
+        // $data = User::orderBy('id','ASC')->paginate(5);
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }

@@ -20,9 +20,9 @@ class CreateStandsTable extends Migration
             $table->integer('heigth');
             $table->timestamps();
 
-            $table->unsignedBigInteger('provider_id');
-            $table->foreign('provider_id')
-            ->references('id')
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+            ->references('user_id')
             ->on('providers')
             ->onDelete('cascade');
 
