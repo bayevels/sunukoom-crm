@@ -12,7 +12,7 @@ Pour fonctionner correctement, Laravel a besoin de PHP :
 *  Extension BCMath,
 *  Extension Ctype,
 *  Extension JSON
-*  Autres prérequis : 
+**  Autres prérequis : 
 *  Composer
 *  Git
 *  Vs Code
