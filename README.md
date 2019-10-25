@@ -64,8 +64,8 @@ fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
    	        deny all;
    	    }
    	}
-
 <code><pre>
+
 # Présentation de l'application
 
 ## Page d'accueil de notre CRM
