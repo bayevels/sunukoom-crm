@@ -75,7 +75,7 @@ fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
 ![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/1.PNG)
 ## Liste des fournisseurs enregistrés
 ![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/2.PNG)
-## Visionnage des employés de notre application
+## Information des employés de notre application
 ![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/3.PNG)
 ## Page de modification d'un employé
 ![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/4.PNG)
