@@ -19,10 +19,10 @@ class PermissionsTableSeeder extends Seeder
             'delete_employees',
             
             
-            'view_providers',
-            'add_providers',
-            'edit_providers',
-            'delete_providers',
+            // 'view_providers',
+            // 'add_providers',
+            // 'edit_providers',
+            // 'delete_providers',
 
             'view_roles',
             'add_roles',
