@@ -69,14 +69,15 @@ fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
 # Présentation de l'application
 
 ## Page d'accueil de notre CRM
-![alt text](https://github.com/bayevels/SunuKoom-Mobile/blob/master/docs/images/11.png)
+
+![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/11.PNG)
 ## Liste des employés enregistrés
-![alt text](https://github.com/bayevels/SunuKoom-Mobile/blob/master/docs/images/1.png)
+![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/1.PNG)
 ## Liste des fournisseurs enregistrés
-![alt text](https://github.com/bayevels/SunuKoom-Mobile/blob/master/docs/images/2.png)
+![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/2.PNG)
 ## Visionnage des employés de notre application
-![alt text](https://github.com/bayevels/SunuKoom-Mobile/blob/master/docs/images/3.png)
+![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/3.PNG)
 ## Page de modification d'un employé
-![alt text](https://github.com/bayevels/SunuKoom-Mobile/blob/master/docs/images/4.png)
+![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/4.PNG)
 ## Page de gestion des rôles de notre application
-![alt text](https://github.com/bayevels/SunuKoom-Mobile/blob/master/docs/images/5.png)
+![alt text](https://github.com/bayevels/sunukoom-crm/blob/master/docs/images/5.PNG)
